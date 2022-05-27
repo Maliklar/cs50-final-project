@@ -1,0 +1,70 @@
+{% extends "main/layout.html" %}
+{% block body %}
+{% load static %}
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <div class="card" style="width:auto" id="quote-container">
+                <div class="card-body">
+                    <h1 class="card-title">{{userInfo.username}}</h1>
+                    <h5 class="card-subtitle mb-2 text-muted">{{userInfo.country}}</h5>
+                    <h5 class="card-subtitle mb-2 text-muted">Member since {{userInfo.date}}</h5>
+                    <hr>
+                    <h6>Fastest WPM: {{best_time}} WPM</h6>
+                    <h6>Latest WPM: {{last_time}} WPM</h6>
+                    <h6>World Ranking: #{{world_rank}}</h6>
+                    <h6>Country Ranking: #{{country_rank}}</h6>
+                    <h6>Games Played: {{games_num}}</h6>
+                    <h6>Quotes Published: {{publish_num}}</h6>
+                    <h6>Average Speed: {{avg_speed}} WPM</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-6" collaps='true'>
+            <div class="card" style="width:auto" id="quote-container">
+                <div class="card-body">
+                    <h1 class="card-title">Statistics</h1>
+                    <img class="card-img" src="{% static graph_path %}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card" style="width:auto" id="quote-container">
+                <h1 class="card-header">Records</h1>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Quote Title</th>
+                            <th>Quote Auther</th>
+                            <th>Published By</th>
+                            <th>WPM</th>
+                            <th>Date</th>
+                        </tr>
+                        {% for record in records %}
+                        <tr>
+                            <td>
+                                {{record.quote.title}}
+                            </td>
+                            <td>
+                                {{record.quote.auther}}
+                            </td>
+                            <td>{{record.quote.user}}</td>
+                            <td>{{record.best_time}}</td>
+                            <td>{{record.date}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

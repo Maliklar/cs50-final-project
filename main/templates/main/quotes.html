@@ -1,0 +1,49 @@
+{% extends "main/layout.html" %}
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                
+                
+                <form class="row row-cols-lg-auto g-3 align-items-center" method="POST" action="{% url 'quotes' %}">
+                    {% csrf_token %}
+                    <h1 class="card-title">
+                        Quotes
+                    </h1>
+                    <div class="col-12">
+                        <input type="search" class="form-control" name="query" id="search-quote" aria-describedby="search" placeholder="Search Quotes" required>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-dark">Search</button>
+                    </div>
+                </form>
+                <hr>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Auther</th>
+                            <th>Publisher</th>
+                            <th>Uploaded Since</th>
+                        </tr>
+                        {% for res in result %}
+                        <tr>
+                            <td><a href="{% url 'view_quote' id=res.id %}">{{res.title}}</a></td>
+                            <td>{{res.auther}}</td>
+                            <td><a href="{% url 'profile' res.user.username %}">{{res.user.username}}</a></td>
+                            <td>{{res.date}}</td>
+                        </tr>
+                        {% endfor %}
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

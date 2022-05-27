@@ -1,0 +1,91 @@
+{% extends "main/layout.html" %}
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="card" style="width: auto;" id="quote-container">
+                <div class="card-body">
+                    <h2 class="card-title">Highest Records</h2>
+                    <h5 class="card-subtitle mb-2 text-muted">Top players overall</h5>
+                    <hr>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Quote</th>
+                                <th>Player</th>
+                                <th>WPM</th>
+                            </tr>
+                            {% for quote in top_quotes %}
+                            <tr>
+                                <th>{{ forloop.counter }}</th>
+                                <th>{{quote.quote.title}}</th>
+                                <td><a href="{% url 'profile' quote.user.username %}">{{quote.user.username}}</a></td>
+                                <td>{{quote.best_time}}</td>
+        
+                            </tr>
+                            {% endfor %}
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="width: auto;" id="quote-container">
+                <div class="card-body ">
+                    <h2 class="card-title">Top Players</h2>
+                    <h5 class="card-subtitlemb-2 text-muted">average speed</h5>
+                    <hr>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Player</th>
+                                <th>WPM</th>
+                            </tr>
+                            {% for key, value in top_players.items %}
+                            <tr>
+                                <th>{{ forloop.counter }}</th>
+                                <th><a href="{% url 'profile' key %}">{{key}}</a></th>
+                                <td>{{value}}</td>
+                    
+                            </tr>
+                            {% endfor %}
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="width: auto;" id="quote-container">
+                <div class="card-body ">
+                    <h2 class="card-title">Recently Added</h2>
+                    <hr>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Title</th>
+                                <th>Auther</th>
+                            </tr>
+                            {% for quote in recent %}
+                            <tr>
+                                <td>{{quote.date}}</td>
+                                <td>{{quote.title}}</td>
+                                <td>{{quote.auther}}</td>
+                    
+                            </tr>
+                            {% endfor %}
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
